@@ -21,6 +21,8 @@ def index():
 def chat():
     """Chat room. The user's name and room must be stored in
     the session."""
+    print("-------")
+    print(request.data)
     name = session.get('name', '')
     room = session.get('room', '')
     if name == '' or room == '':

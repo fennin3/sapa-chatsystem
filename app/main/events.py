@@ -6,8 +6,15 @@ import  requests
 
 @socketio.on('joined', namespace='/chat')
 def joined(message):
-    """Sent by clients when they enter a room.
-    A status message is broadcast to all people in the room."""
+    print(message)
+    receiver = message['receiver']
+    sender = message['sender']
+
+    
+    # setting messages to read once the receiver join the websocket...
+    data = requests.post(f"http://127.0.0.1:8000/general/set-unread-messages-to-read/{receiver}/{sender}/")
+    print(data.status_code)
+    
     room = session.get('room')
     join_room(room)
     # emit('status', {'msg': session.get('name') + ' has entered the room.'}, room=room)
@@ -16,13 +23,11 @@ def joined(message):
 @socketio.on('text', namespace='/chat')
 def text(message):
 
-    dat = {
-        "sender":"GH2117241972",
-        "receiver":"GH1427453171",
-        "message":"microservices trying here.",
-        "attached_file":None,
-    }
-    data = requests.post("http://127.0.0.1:8000/chatsystem/message/", dat)
+
+    # Saving sent message back to SAPA main Database
+    data = requests.post("http://127.0.0.1:8000/chatsystem/message/", message)
+
+
     print(data.status_code)
     room = session.get('room')
     emit('message', {'msg': session.get('name') + ':' + message['msg']}, room=room)

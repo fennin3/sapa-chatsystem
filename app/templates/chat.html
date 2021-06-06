@@ -8,7 +8,7 @@
             $(document).ready(function(){
                 socket = io.connect('http://' + document.domain + ':' + location.port + '/chat');
                 socket.on('connect', function() {
-                    socket.emit('joined', {});
+                    socket.emit('joined', {sender:"GH2117241972", receiver:"GH1427453171"});
                 });
                 socket.on('status', function(data) {
                     $('#chat').val($('#chat').val() + '<' + data.msg + '>\n');
@@ -23,7 +23,9 @@
                     if (code == 13) {
                         text = $('#text').val();
                         $('#text').val('');
-                        socket.emit('text', {msg: text, id:2});
+
+                        //Putting the data you are gonna pass to the backend here
+                        socket.emit('text', {msg: text, sender:"GH2117241972", receiver:"GH1427453171", message:text}); //in the map here
                     }
                 });
             });
@@ -31,7 +33,7 @@
                 socket.emit('left', {}, function() {
                     socket.disconnect();
 
-                    // go back to the login page
+
                     window.location.href = "{{ url_for('main.index') }}";
                 });
             }
