@@ -12,8 +12,8 @@ def joined(message):
 
     
     # setting messages to read once the receiver join the websocket...
-    data = requests.post(f"http://127.0.0.1:8000/general/set-unread-messages-to-read/{receiver}/{sender}/")
-    print(data.status_code)
+    # data = requests.post(f"http://127.0.0.1:8000/general/set-unread-messages-to-read/{receiver}/{sender}/")
+    # print(data.status_code)
     
     room = session.get('room')
     join_room(room)
