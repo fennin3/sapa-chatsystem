@@ -8,6 +8,8 @@
             $(document).ready(function(){
                 socket = io.connect('http://' + document.domain + ':' + location.port + '/chat');
                 socket.on('connect', function() {
+
+                    //Passing data to backend so previous messages can be marked as read.
                     socket.emit('joined', {sender:"GH2117241972", receiver:"GH1427453171"});
                 });
                 socket.on('status', function(data) {
