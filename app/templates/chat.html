@@ -10,7 +10,7 @@
                 socket.on('connect', function() {
 
                     //Passing data to backend so previous messages can be marked as read.
-                    socket.emit('joined', {sender:"GH2117241972", receiver:"GH1427453171"});
+                    socket.emit('joined', {sender:"GH2117241972", receiver:"GH1427453171", room:"12"});
                 });
                 socket.on('status', function(data) {
                     $('#chat').val($('#chat').val() + '<' + data.msg + '>\n');
