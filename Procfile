@@ -1,1 +1,1 @@
-gunicorn -k gevent -w 1 chat:app
+web: gunicorn -k gevent -w 1 chat:app
